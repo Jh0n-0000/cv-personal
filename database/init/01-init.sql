@@ -34,9 +34,6 @@ VALUES (
     'Cochabamba',
     'https://placehold.co/300x300'
 );
-
-INSERT INTO formacion (titulo, institucion, anio, persona_id)
-VALUES
     
 INSERT INTO formacion (titulo, institucion, anio, persona_id)
 VALUES
