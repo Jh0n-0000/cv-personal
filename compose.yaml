@@ -1,0 +1,58 @@
+
+services:
+  frontend:
+    image: darksould/cv-personal-frontend:v1
+    container_name: cv-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - cv_network
+
+  backend:
+    image: darksould/cv-personal-backend:v1
+    container_name: cv-backend
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      DB_HOST: database
+      DB_USER: cv_user
+      DB_PASSWORD: cv_password
+      DB_NAME: cv_database
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - cv_network
+
+  database:
+    image: mysql:8.0
+    container_name: cv-database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_cv_password
+      MYSQL_DATABASE: cv_database
+      MYSQL_USER: cv_user
+      MYSQL_PASSWORD: cv_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot_cv_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - cv_network
+
+networks:
+  cv_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
