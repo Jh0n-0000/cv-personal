@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS formacion (
 INSERT INTO persona (id, nombre, apellido, ciudad, foto)
 VALUES (
     1,
-    'Mateo',
-    'del Castillo Suarez',
+    'Jhon Moises',
+    'Ramos Hilaya',
     'Cochabamba',
     'https://placehold.co/300x300'
 );

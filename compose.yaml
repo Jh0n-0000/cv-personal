@@ -1,7 +1,7 @@
 
 services:
   frontend:
-    image: darksould/cv-personal-frontend:v1
+    image: darksould/ramos-frontend:v1
     container_name: cv-frontend
     ports:
       - "3000:80"
@@ -11,7 +11,7 @@ services:
       - cv_network
 
   backend:
-    image: darksould/cv-personal-backend:v1
+    image: darksould/ramos-backend:v1
     container_name: cv-backend
     restart: always
     ports:
